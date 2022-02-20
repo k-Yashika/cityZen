@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    
+
+    <title>Sign up</title>
+
+    <style>
+
+      body {
+        background-image: url('img/top-bg.png');
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size: 100% 100%;
+      }
+      </style>
+
+  </head>
+  <body>
+
+    <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light">
+      <!--to contain contents in the container in the nav bar-->
+      <div class="container">
+        <!--Put title and image of the website-->
+        <a href="#" class="navbar-brand mb-0 h1">
+          <img src="img/vaccinationIcon.png" width="45" height="auto" alt="imageWeb">
+          PCVS
+        </a>
+
+        <!--
+          To toggle the navigation bar
+          data-toggle: class that will be applying toggle to 
+          data-target: target will be that ID created in div tag below
+          add accessible tags: aria-controls, expanded, label
+        -->
+        <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" class="navbar-toggler">
+          <!--Add icon for the toggle button-->
+          <span class="navbar-toggler-icon"></span>
+
+        </button>
+        <!--to ensure that this tag to have responsive design to make nav bar function properly-->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav">
+            <!--Create dropdown toggle-->
+            <li class="nav-item active dropdown">
+
+              <!--To dropdown the items-->
+              <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sign Up
+              </a>
+
+              <!--dropdown items-->
+              <ul class="dropdown-menu"aria-labelledby="navbarDropdown">
+              
+                <li>
+                  <a href="adminSignUp" class="dropdown-item">
+                    Sign Up As Healthcare Administrator
+                  </a>
+                </li>
+
+                <li>
+                  <a href="patientSignUp" class="dropdown-item">
+                    Sign Up As Patient
+                  </a>
+                </li>
+
+              </ul>
+
+            </li>
+
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                Login
+              </a>
+            </li>
+          </ul>
+        </div>
+        
+        <!--Create search bar-->
+        <!--
+          form-control: create some of the stylings for the input
+        
+        <form action="#" class="d-flex">
+          <input type="text" class="form-control me-2" name="search">
+          <button type="submit" class="btn btn-outline-success">
+            Search
+          </button>
+        </form>
+      -->
+      </div>
+    </nav>
+  
+
+<br><br><br>
+<br>
+
+
+
+    <form action="action_page.php" style="border:1px solid #ccc">
+        <div class="container">
+      
+      <h1>Sign Up</h1>
+      <hr>    
+          
+        
+           
+        <div class="row">
+            <div class="col">
+                <label for="username" ><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="username" required> 
+            </div>
+          
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+            </div>
+        </div>
+          
+
+        <div class="row">
+            <div class="col">
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" name="email" required> 
+            </div>
+        </div>
+          
+
+        <div class="row">
+            <div class="col">
+                <label for="passport"><b>Passport / IC</b></label>
+                <input type="text" placeholder="Enter your passport number / IC number" name="passport" required>
+            </div>
+        </div>
+          
+      
+        <div class="row">
+            <div class="col">
+                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+                </label>
+            </div>
+        </div>
+          <label>
+            
+      
+          <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+      
+          <div class="clearfix">
+            <button type="submit" class="signupbtn">Sign Up</button>
+            <button type="button" class="cancelbtn">Cancel</button>
+            
+            
+          </div>
+        </div>
+      </form>
+
+    <!-- ======= Footer ======= -->
+  <footer id="footer" class="section-bg">
+    <div class="footer-top">
+      <div class="container">
+          <div class="row text-center">
+              <div class="col-sm-6">
+
+                <div class="footer-info">
+                  <img src="img/vaccinationIcon.png" width="45" height="auto" alt="PCVSIcon">
+                  <h3>PCVS</h3>
+                  <p>There are many Covid-19 test centres that have been set up to manage Covid-19 testing. Private Covid Vaccination System will help allowing the health ministry to keep
+                      track of vaccinations that have been administered by healthcare administrators in different healthcare centres.s
+                  </p>
+                </div>
+
+                <div class="footer-newsletter">
+                  <h4>Covid-19</h4>
+                  <p>Coronavirus disease (COVID-19) is an infectious disease caused by a newly discovered coronavirus.
+                    Most people infected with the COVID-19 virus will experience mild to moderate respiratory illness and recover without requiring special treatment.
+                  </p>
+                </div>
+
+              </div>
+
+              <div class="col-sm-6">
+                <div class="footer-links">
+                  <h4>Pages</h4>
+                  <ul class="list-unstyled">
+                    <li><a href="#">View List of Vaccines</a></li>
+                    <li><a href="#">Sign Up</a></li>
+                    <li><a href="#">Login as administrator</a></li>
+                    <li><a href="#">Link</a></li>
+                  </ul>
+                </div>
+
+                <div class="footer-links">
+                  <h4>Contact Us</h4>
+                  <p>
+                    <strong>Address : </strong>No. 15, Jalan Sri Semantan 1, Off, Jalan Semantan<br>
+                    Bukit Damansara, 50490<br>
+                    Kuala Lumpur<br>
+                    <strong>Phone : </strong>012-123-4567<br>
+                    <strong>Email : </strong>CTIS@gmail.com<br>
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong>CTIS</strong>. All Rights Reserved
+      </div>
+    </div>
+  </footer><!-- End  Footer -->  
+    
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+    
+  </body>
+</html>

@@ -1,3 +1,4 @@
+<?php include('server.php') ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -89,7 +90,8 @@
 
 
 
-    <form action="action_page.php" style="border:1px solid #ccc">
+    <form action="signup.php" style="border:1px solid #ccc">
+    <?php include('errors.php'); ?>
         <div class="container">
       
       <h1>Sign Up</h1>
@@ -100,23 +102,32 @@
         <div class="row">
             <div class="col">
                 <label for="username" ><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="username" required> 
+                <input type="text" placeholder="Enter Username" name="username" required value="<?php echo $username; ?>"> 
             </div>
           
         </div>
 
         <div class="row">
             <div class="col">
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
+                <label for="password_1"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password_1" required>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="password_1"><b>confirm Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password_2" required>
+            </div>
+        </div>
+
+
           
 
         <div class="row">
             <div class="col">
                 <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" name="email" required> 
+                <input type="text" placeholder="Enter Email" name="email" value="<?php echo $email; ?>"required> 
             </div>
         </div>
           
@@ -141,7 +152,7 @@
           <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
       
           <div class="clearfix">
-            <button type="submit" class="signupbtn" >Sign Up</button>
+            <button type="submit" class="signupbtn"  name="reg_user" >Sign Up</button>
             
              
             <button type="button" class="cancelbtn">Cancel</button>
@@ -149,6 +160,9 @@
             
           </div>
         </div>
+        <p>
+  		Already a member? <a href="login.php">Sign in</a>
+  	</p>
       </form>
 
     <!-- ======= Footer ======= -->

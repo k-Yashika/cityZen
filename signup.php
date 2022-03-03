@@ -166,6 +166,10 @@
           </div>
         </div>
         <p>
+        &nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;
   		Already a member? <a href="login.php">Sign in</a>
   	</p>
       </form>
@@ -184,7 +188,7 @@
                 </div>
 
                 <div class="footer-newsletter">
-                  <h4>Covid-19</h4>
+                  
                   <p></p>
                 </div>
 

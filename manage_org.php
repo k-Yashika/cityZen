@@ -1,3 +1,6 @@
+<?php
+$db=mysqli_connect("localhost","root","","cityzen")
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -37,7 +40,7 @@
     <!-- Navbar (sit on top) -->
     <div class="w3-top">
     <div class="w3-bar w3-white w3-card" id="myNavbar">
-        <a href="#home" class="w3-bar-item w3-button w3-wide">cityZen</a>
+        <a href="manage_org.php" class="w3-bar-item w3-button w3-wide">cityZen</a>
         <!-- Right-sided navbar links -->
         <div class="w3-right w3-hide-small">
         <a href="#about" class="w3-bar-item w3-button"><i class="fa fa-user"></i> ABOUT</a>
@@ -65,9 +68,20 @@
     </div>
 
     <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        Select an existing Organization
-      </button>
+      <form name="orgFormdd" action="" method="post">
+      <select>
+        <option>Select an existing Organization</option>
+        <?php
+        $result=mysqli_query($db,"SELECT * FROM organizations");
+        WHILE($row=mysqli_fetch_array($result)){
+          ?>
+          <option><?php echo $row["org_id"]; ?>. <?php echo $row["name"]; ?></option>
+        <?php
+        }
+        ?>
+      </select>
+
+        <!--make dynamic dropdown list-->
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" onclick="window.location.href='new_org.php'" class="addbtn">
         Add a New Organization
       </button>
@@ -89,6 +103,6 @@
       function w3_close() {
           mySidebar.style.display = "none";
       }
-      </script>
+    </script>
 </body>
 </html>

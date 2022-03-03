@@ -1,4 +1,9 @@
-<?php include('server.php') ?>
+<?php
+  ini_set('display_errors', '1');
+  ini_set('display_startup_errors', '1');
+  error_reporting(E_ALL);
+  include('server.php');
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -63,7 +68,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="login.php" class="nav-link">
                 Login
               </a>
             </li>
@@ -90,7 +95,7 @@
 
 
 
-    <form action="signup.php" style="border:1px solid #ccc">
+    <form action="signup.php" method="post" style="border:1px solid #ccc">
     <?php include('errors.php'); ?>
         <div class="container">
       
@@ -102,7 +107,7 @@
         <div class="row">
             <div class="col">
                 <label for="username" ><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="username" required value="<?php echo $username; ?>"> 
+                <input type="text" placeholder="Enter Username" name="username" required value="<?php if(isset($username)){echo $username;} ?>" > 
             </div>
           
         </div>
@@ -110,14 +115,14 @@
         <div class="row">
             <div class="col">
                 <label for="password_1"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password_1" required>
+                <input type="password" placeholder="Enter Password" name="password_1" required  value="<?php if(isset($password_1)){echo $password_1;} ?>">
             </div>
         </div>
 
         <div class="row">
             <div class="col">
-                <label for="password_1"><b>confirm Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password_2" required>
+                <label for="password_2"><b>confirm Password</b></label>
+                <input type="password" placeholder="ReEnter Password" name="password_2" required value="<?php if(isset($password_2)){echo $password_2;} ?>">
             </div>
         </div>
 
@@ -127,7 +132,7 @@
         <div class="row">
             <div class="col">
                 <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" name="email" value="<?php echo $email; ?>"required> 
+                <input type="text" placeholder="Enter Email" name="email" required value="<?php if(isset($email)){echo $email;} ?>"> 
             </div>
         </div>
           
@@ -135,7 +140,7 @@
         <div class="row">
             <div class="col">
                 <label for="passport"><b>Passport / IC</b></label>
-                <input type="text" placeholder="Enter your passport number / IC number" name="passport" required>
+                <input type="text" placeholder="Enter your passport number / IC number" name="passport" required value="<?php if(isset($passport)){echo $passport;} ?>" >
             </div>
         </div>
           
@@ -161,6 +166,10 @@
           </div>
         </div>
         <p>
+        &nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;
   		Already a member? <a href="login.php">Sign in</a>
   	</p>
       </form>
@@ -179,7 +188,7 @@
                 </div>
 
                 <div class="footer-newsletter">
-                  <h4>Covid-19</h4>
+                  
                   <p></p>
                 </div>
 

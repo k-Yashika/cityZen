@@ -1,92 +1,92 @@
 <?php
 session_start();
 
-if(count($_POST) > 0){
-  echo '<pre>' . print_r($_POST, 1) . '</pre>';
-  die();
-
-}
-
-// initializing variables
-$username = "";
-$email    = "";
-$errors = array(); 
-
 // connect to the database
-$db = mysqli_connect('localhost', 'root', '', 'registration');
+$conn = mysqli_connect('localhost', 'root', '');
+$db = mysqli_select_db($conn, 'cityZen');
 
-// REGISTER USER
-if (isset($_POST['reg_user'])) {
-  // receive all input values from the form
-  $username = mysqli_real_escape_string($db, $_POST['username']);
-  $email = mysqli_real_escape_string($db, $_POST['email']);
-  $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
-  $password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
-
-  // form validation: ensure that the form is correctly filled ...
-  // by adding (array_push()) corresponding error unto $errors array
-  if (empty($username)) { array_push($errors, "Username is required"); }
-  if (empty($email)) { array_push($errors, "Email is required"); }
-  if (empty($password_1)) { array_push($errors, "Password is required"); }
-  if ($password_1 != $password_2) {
-	array_push($errors, "The two passwords do not match");
-  }
-
-  // first check the database to make sure 
-  // a user does not already exist with the same username and/or email
-  $user_check_query = "SELECT * FROM users WHERE username='$username' OR email='$email' LIMIT 1";
-  $result = mysqli_query($db, $user_check_query);
-  $user = mysqli_fetch_assoc($result);
+$alarms = array();
+$errors = array(); 
+if(count($_POST) > 0){
+  if(isset($_POST['reg_user'])){
+    $username = !empty($_POST['username']) ? mysqli_real_escape_string($conn, $_POST['username']) : '';
+    $password_1 = !empty($_POST['password_1']) ? mysqli_real_escape_string($conn, $_POST['password_1']) : '';
+    $password_2 = !empty($_POST['password_2']) ? mysqli_real_escape_string($conn, $_POST['password_2']) : '';
+    $email = !empty($_POST['email']) ? mysqli_real_escape_string($conn, $_POST['email']) : '';
+    $passport = !empty($_POST['passport']) ? mysqli_real_escape_string($conn, $_POST['passport']) : '';
   
-  if ($user) { // if user exists
-    if ($user['username'] === $username) {
-      array_push($errors, "Username already exists");
+    if($username == ''){
+      $errors['username'] = 'Username can not be empty!';
     }
 
-    if ($user['email'] === $email) {
-      array_push($errors, "email already exists");
+    if($password_1 == ''){
+      $errors['password_1'] = 'Password can not be empty!';
     }
-  }
 
-  // Finally, register user if there are no errors in the form
-  if (count($errors) == 0) {
-  	$password = md5($password_1);//encrypt the password before saving in the database
+    if($password_2 == ''){
+      $errors['password_2'] = 'RePassword can not be empty!';
+    }
 
-  	$query = "INSERT INTO users (username, email, password) 
-  			  VALUES('$username', '$email', '$password')";
-  	mysqli_query($db, $query);
-  	$_SESSION['username'] = $username;
-  	$_SESSION['success'] = "You are now logged in";
-  	header('location: index.php');
-  }
-}
+    if($password_1 != $password_2){
+      $errors['equal'] = 'RePassword is not equal Password';
+    }
 
-// ... 
-
-// LOGIN USER
-if (isset($_POST['login_user'])) {
-    $username = mysqli_real_escape_string($db, $_POST['username']);
-    $password = mysqli_real_escape_string($db, $_POST['password']);
+    if($email == ''){
+      $errors['email'] = 'Email can not be empty!';
+    }
   
-    if (empty($username)) {
-        array_push($errors, "Username is required");
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $errors['email_invalid'] = 'Email is not correct';
     }
-    if (empty($password)) {
-        array_push($errors, "Password is required");
+
+    if($passport == ''){
+      $errors['passport'] = 'Passport can not be empty!';
+    }
+
+    if(count($errors) == 0){
+      $query = "INSERT INTO `tb_users` (`username`, `password`, `email`, `passport`) VALUES ('".$username."', '".$password_1."', '".$email."', '".$passport."');";
+      $result = mysqli_query($conn, $query);
+      //$_SESSION['username'] = $username;
+      //$_SESSION['success'] = 1;
+
+      header('Location: login.php');
+//      echo '<pre>' . print_r($result, 1)  . '</pre>';
+    } else {
+      //echo '<pre>' . print_r($errors, 1) . '</pre>';
+    }
+  }
+
+
+  // LOGIN USER
+  if (isset($_POST['login_user'])) {
+    $username = !empty($_POST['username']) ? mysqli_real_escape_string($conn, $_POST['username']) : '';
+    $password = !empty($_POST['password']) ? mysqli_real_escape_string($conn, $_POST['password']) : '';
+  
+    if($username == ''){
+      $errors['username'] = 'Username can not be empty!';
+    }
+
+    if($password == ''){
+      $errors['password'] = 'Password can not be empty!';
     }
   
     if (count($errors) == 0) {
-        $password = md5($password);
-        $query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
-        $results = mysqli_query($db, $query);
+        $password = $password;
+        $query = "SELECT * FROM `tb_users` WHERE `username`='$username' AND `password` ='$password'";
+        $results = mysqli_query($conn, $query);
+
         if (mysqli_num_rows($results) == 1) {
           $_SESSION['username'] = $username;
-          $_SESSION['success'] = "You are now logged in";
+          $_SESSION['success'] = 1;
+
           header('location: index.php');
-        }else {
-            array_push($errors, "Wrong username/password combination");
+        } else {
+          $errors['password'] = 'Username or Password is not correct!';
         }
     }
   }
-  
+}
+
+
+
   ?>

@@ -180,9 +180,11 @@
       <div class="container">
           <div class="row text-center">
               <div class="col-sm-6">
+              <br><br>
 
                 <div class="footer-info">
                   <img src="img/HelpAid3.png" width="45" height="auto" alt="PCVSIcon">
+                  <br><br>
                   <h3>CityZen</h3>
                   <p></p>
                 </div>
@@ -222,7 +224,7 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong>CTIS</strong>. All Rights Reserved
+        &copy; Copyright <strong>CityZen</strong>. All Rights Reserved
       </div>
     </div>
   </footer><!-- End  Footer -->  

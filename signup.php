@@ -90,7 +90,7 @@
 
 
 
-    <form action="signup.php" style="border:1px solid #ccc">
+    <form action="signup.php" method="post" style="border:1px solid #ccc">
     <?php include('errors.php'); ?>
         <div class="container">
       
@@ -116,8 +116,8 @@
 
         <div class="row">
             <div class="col">
-                <label for="password_1"><b>confirm Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password_2" required>
+                <label for="password_2"><b>confirm Password</b></label>
+                <input type="password" placeholder="ReEnter Password" name="password_2" required>
             </div>
         </div>
 

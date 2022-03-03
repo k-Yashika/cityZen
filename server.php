@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+if(count($_POST) > 0){
+  echo '<pre>' . print_r($_POST, 1) . '</pre>';
+  die();
+
+}
+
 // initializing variables
 $username = "";
 $email    = "";

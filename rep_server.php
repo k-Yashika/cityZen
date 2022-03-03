@@ -2,7 +2,7 @@
 
 $db = mysqli_connect("localhost", "root", "", "cityzen");
 
-if($db === false){
+if(!$db){
     die("ERROR: Could not connect" . mysqli_connect_error());
 }
 

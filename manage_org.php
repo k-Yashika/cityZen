@@ -1,5 +1,5 @@
 <?php
-$db=mysqli_connect("localhost","root","","cityzen")
+$db=mysqli_connect("root","","cityZen")
 ?>
 <!DOCTYPE html>
 <html>

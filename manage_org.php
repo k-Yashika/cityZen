@@ -1,5 +1,7 @@
 <?php
-$db=mysqli_connect("root","","cityZen")
+  $conn = mysqli_connect("localhost", "root","");
+  $db = mysqli_select_db($conn, "cityZen");
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -72,7 +74,11 @@ $db=mysqli_connect("root","","cityZen")
       <select>
         <option>Select an existing Organization</option>
         <?php
-        $result=mysqli_query($db,"SELECT * FROM organizations");
+        $query = "SELECT * FROM `organizations`";
+        $result = mysqli_query($conn, $query);
+echo '<pre>' . print_r($result, 1) . '</pre>';
+
+        //$result=mysqli_query($db,"SELECT * FROM organizations");
         WHILE($row=mysqli_fetch_array($result)){
           ?>
           <option><?php echo $row["org_id"]; ?>. <?php echo $row["name"]; ?></option>

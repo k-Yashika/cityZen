@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="style.css">
     
 
-    <title>Sign up</title>
+    <title>Register Applicant</title>
 
     <style>
 
@@ -30,7 +30,11 @@
 
   </head>
   <body>
-
+<?php 
+  if(isset($_GET['register']) && $_GET['register'] == 'done'){
+    echo '<script>alert("Registered Successfully!");window.location.href = "signup.php"</script>';
+  }
+?>
     <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light">
       <!--to contain contents in the container in the nav bar-->
       <div class="container">
@@ -59,11 +63,10 @@
 
               <!--To dropdown the items-->
               <a href="#" class="nav-link">
-                Sign Up
+                Register Applicant
               </a>
 
-              
-              
+            
 
             </li>
 
@@ -99,50 +102,47 @@
     <?php include('errors.php'); ?>
         <div class="container">
       
-      <h1>Sign Up</h1>
+      <h1>Register Applicant</h1>
+
+        <!-- logged in user information -->
+        <?php  if (isset($_SESSION['username'])) : ?>
+              <p>Welcome <strong><?php echo $_SESSION['username']; ?></strong></p>
+              
+            <?php endif ?>
       <hr>    
           
         
            
         <div class="row">
             <div class="col">
-                <label for="username" ><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="username" required value="<?php if(isset($username)){echo $username;} ?>" > 
+                <label for="fullname" ><b>FullName</b></label>
+                <input type="text" placeholder="Enter Fullname" name="fullname" required value="<?php if(isset($fullname)){echo $fullname;} ?>" > 
             </div>
           
         </div>
 
         <div class="row">
             <div class="col">
-                <label for="password_1"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password_1" required  value="<?php if(isset($password_1)){echo $password_1;} ?>">
+                <label for="applicantID"><b>Applicant ID</b></label>
+                <input type="text" placeholder="Enter Applicant ID" name="applicantID" required  value="<?php if(isset($applicantID)){echo $applicantID;} ?>">
             </div>
         </div>
 
         <div class="row">
             <div class="col">
-                <label for="password_2"><b>confirm Password</b></label>
-                <input type="password" placeholder="ReEnter Password" name="password_2" required value="<?php if(isset($password_2)){echo $password_2;} ?>">
-            </div>
-        </div>
-
-
-          
-
-        <div class="row">
-            <div class="col">
-                <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" name="email" required value="<?php if(isset($email)){echo $email;} ?>"> 
+                <label for="address"><b>Address</b></label>
+                <input type="text" placeholder="Enter Address" name="address" required value="<?php if(isset($address)){echo $address;} ?>"> 
             </div>
         </div>
           
 
         <div class="row">
             <div class="col">
-                <label for="passport"><b>Passport / IC</b></label>
-                <input type="text" placeholder="Enter your passport number / IC number" name="passport" required value="<?php if(isset($passport)){echo $passport;} ?>" >
+                <label for="householdIncome"><b>House hold income</b></label>
+                <input type="number" placeholder="Enter House hold income" name="householdIncome" required value="<?php if(isset($householdIncome)){echo $householdIncome;} ?>" >
             </div>
         </div>
+        <br><br>
           
       
         <div class="row">
@@ -157,21 +157,26 @@
           <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
       
           <div class="clearfix">
-            <button type="submit" class="signupbtn"  name="reg_user" >Sign Up</button>
-            
-             
-            <button type="button" class="cancelbtn">Cancel</button>
+            <button type="submit" class="signupbtn"  name="reg_user" >Submit</button>
             
             
           </div>
         </div>
-        <p>
+        
+        <p >
         &nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;
-  		Already a member? <a href="login.php">Sign in</a>
-  	</p>
+        <?php
+          if(isset($_SESSION['username'])){
+        ?>
+          <p> <a href="logout.php?logout='1'" style="color: blue;">logout</a> </p>
+        <?php
+          }
+        ?>
+        
+        </p>
       </form>
 
     <!-- ======= Footer ======= -->
@@ -190,7 +195,7 @@
                 </div>
 
                 <div class="footer-newsletter">
-                  
+                 
                   <p></p>
                 </div>
 

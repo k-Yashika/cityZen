@@ -1,7 +1,6 @@
 <?php
   $conn = mysqli_connect("localhost", "root","");
   $db = mysqli_select_db($conn, "cityZen");
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -70,18 +69,15 @@
     </div>
 
     <div class="dropdown">
-      <form name="orgFormdd" action="" method="post">
-      <select>
+      <form name="orgFormdd" action="new_rep.php" method="get">
+      <select name="org">
         <option>Select an existing Organization</option>
         <?php
         $query = "SELECT * FROM `organizations`";
-        $result = mysqli_query($conn, $query);
-echo '<pre>' . print_r($result, 1) . '</pre>';
-
-        //$result=mysqli_query($db,"SELECT * FROM organizations");
+        $result = mysqli_query($conn,$query);
         WHILE($row=mysqli_fetch_array($result)){
           ?>
-          <option><?php echo $row["org_id"]; ?>. <?php echo $row["name"]; ?></option>
+          <option value="<?php echo $row["name"]; ?>"><?php echo $row["org_id"]; ?>. <?php echo $row["name"]; ?></option>
         <?php
         }
         ?>
@@ -91,6 +87,11 @@ echo '<pre>' . print_r($result, 1) . '</pre>';
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" onclick="window.location.href='new_org.php'" class="addbtn">
         Add a New Organization
       </button>
+
+      <button class="btn btn-secondary dropdown-toggle" type="submit" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" class="addbtn">
+        Submit
+      </button>
+      </form>
     </div>
 
     <script>

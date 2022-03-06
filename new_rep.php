@@ -1,3 +1,16 @@
+<?php
+  $conn = mysqli_connect("localhost", "root","");
+  $db = mysqli_select_db($conn, "cityZen");
+
+    $org = '';
+    if(isset($_GET['org'])){
+        $org = mysqli_real_escape_string($conn, $_GET['org']);
+    }
+
+    if($org == ''){
+        header("Location: manage_org.php");
+    }
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -91,11 +104,12 @@
     </nav>
 
     <div class="w3-container" id="add-rep">
-        <h1 class="w3-center">Organization Name</h1>
+        <h1 class="w3-center"><?php echo $org; ?></h1>
         <h4 class="w3-center">Record a New Organization Representative</h4>
     </div>
 
       <form class="repForm" action="rep_server.php" method="POST">
+        <input name="org" type="hidden" value="<?php echo $org ?>" />
         <div class="w3-center">
             <p>Username <input type="text" name="username" required></p>
             <p>Full Name <input type="text" name="fullname" required></p>

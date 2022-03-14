@@ -155,22 +155,28 @@
     <div class="w3-container" id="selected-appeal">
         <h1 class="w3-center"><?php echo $appeal; ?></h1>
     </div>
-    <div class="w3-center">
-        <?php 
-        $query = "SELECT * FROM 'appeals'";
+
+    <form class="s_appealForm" action="s_appeal_server.php" method="POST">
+        <div class="w3-center">
+        <?php
+        $query = "SELECT * FROM `appeals`";
         $result = mysqli_query($conn,$query);
-        WHILE($row = mysqli_fetch_query($result)){
-            ?>
-        <option value="<?php echo $row["start_date"]; ?>">
+        WHILE($row=mysqli_fetch_array($result)){
+          ?>
+          <option value="<?php echo $row["appeal_id"]; ?>"><?php echo $row["start_date"]; ?> -> <?php echo $row["end_date"]; ?></option>
         <?php
         }
         ?>
+            <label type="text" name="contribution_id"></p>
+            <p>Description <textarea name="s_description" cols="100" rows="8" required></textarea></p>
+            <p>Estimated Value of Goods <input type="text" name="value"></p>
+            <input class="submit" type="submit" value="Submit">
     </div>
+    </form>
     <!--
         
         show appeal start and end date
-        description
-        estimated value of goods
+        
     -->
     </body>
   </html>

@@ -47,6 +47,7 @@
         input[type="submit"], input[type="text"]{
           display:block;
           margin-left: 380px;
+          margin-left: 240px;
         }
 
         input[type="text"]{
@@ -140,6 +141,8 @@
     </nav>
     <div class="w3-container" id="manage-org">
       <h1 class="w3-center">Record Contributions</h1>
+    <div class="w3-container" id="manage-appeal">
+      <h1 class="w3-center">Record Contribution</h1>
     </div>
 
     <div class="dropdown">
@@ -161,4 +164,5 @@
         <input class="submit-btn" type="submit" value="Submit">
       </select>
     </body>
+    </html>
     </html>

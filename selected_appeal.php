@@ -1,8 +1,20 @@
-<!--organize aid appeal: use case 3-->
+<?php
+  $conn = mysqli_connect("localhost", "root","");
+  $db = mysqli_select_db($conn, "cityzen");
+
+    $appeal = '';
+    if(isset($_GET['appeal'])){
+        $appeal = mysqli_real_escape_string($conn, $_GET['appeal']);
+    }
+
+    if($appeal == ''){
+        header("Location: record_contributions.php");
+    }
+?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Add Appeal</title>
+        <title><?php echo $appeal ?></title>
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -71,15 +83,7 @@
         <link rel="stylesheet" href="/resources/demos/style.css">
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
         <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-        <!--
-        <script>
-          $( function() {
-          $( "#datepicker" ).datepicker();});
-
-          $( function() {
-          $( "#datepicker2" ).datepicker();});
-        </script> 
-          -->
+        
     </head>
     </head>
     <body>
@@ -148,19 +152,31 @@
       -->
       </div>
     </nav>
-    <div class="w3-container" id="add-appeal">
-        <h1 class="w3-center">New Appeal</h1>
-        <h4 class="w3-center">Record a New Aid Appeal</h4>
+    <div class="w3-container" id="selected-appeal">
+        <h1 class="w3-center"><?php echo $appeal; ?></h1>
     </div>
 
-      <form class="appealForm" action="appeal_server.php" method="POST">
+    <form class="s_appealForm" action="s_appeal_server.php" method="POST">
         <div class="w3-center">
-            <label type="text" name="appeal_id"></p>
-            <p>Start Date <input type="date" name="start_date" required></p>
-            <p>End Date <input type="date" name="end_date" required></p>
-            <p>Description<textarea name="description" cols="100" rows="8" required></textarea></p>
+        <?php
+        $query = "SELECT * FROM `appeals`";
+        $result = mysqli_query($conn,$query);
+        WHILE($row=mysqli_fetch_array($result)){
+          ?>
+          <option value="<?php echo $row["appeal_id"]; ?>"><?php echo $row["start_date"]; ?> -> <?php echo $row["end_date"]; ?></option>
+        <?php
+        }
+        ?>
+            <label type="text" name="contribution_id"></p>
+            <p>Description <textarea name="s_description" cols="100" rows="8" required></textarea></p>
+            <p>Estimated Value of Goods <input type="text" name="value"></p>
             <input class="submit" type="submit" value="Submit">
     </div>
     </form>
+    <!--
+        
+        show appeal start and end date
+        
+    -->
     </body>
-    </html>
+  </html>

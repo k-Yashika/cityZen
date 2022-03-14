@@ -1,8 +1,12 @@
-<!--organize aid appeal: use case 3-->
+<!--record contributions: use case 5--> 
+<?php
+  $conn = mysqli_connect("localhost", "root","");
+  $db = mysqli_select_db($conn, "cityZen");
+?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Add Appeal</title>
+        <title>Record Contributions</title>
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,7 +46,7 @@
 
         input[type="submit"], input[type="text"]{
           display:block;
-          margin-left: 240px;
+          margin-left: 380px;
         }
 
         input[type="text"]{
@@ -66,21 +70,7 @@
           background-color: #FFC300;
         }
         </style>
-
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="/resources/demos/style.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-        <!--
-        <script>
-          $( function() {
-          $( "#datepicker" ).datepicker();});
-
-          $( function() {
-          $( "#datepicker2" ).datepicker();});
-        </script> 
-          -->
-    </head>
+        </head>
     </head>
     <body>
 
@@ -148,19 +138,27 @@
       -->
       </div>
     </nav>
-    <div class="w3-container" id="add-appeal">
-        <h1 class="w3-center">New Appeal</h1>
-        <h4 class="w3-center">Record a New Aid Appeal</h4>
+    <div class="w3-container" id="manage-org">
+      <h1 class="w3-center">Record Contributions</h1>
     </div>
 
-      <form class="appealForm" action="appeal_server.php" method="POST">
-        <div class="w3-center">
-            <label type="text" name="appeal_id"></p>
-            <p>Start Date <input type="date" name="start_date" required></p>
-            <p>End Date <input type="date" name="end_date" required></p>
-            <p>Description<textarea name="description" cols="100" rows="8" required></textarea></p>
-            <input class="submit" type="submit" value="Submit">
-    </div>
-    </form>
+    <div class="dropdown">
+      <form name="appealFormdd" action="selected_appeal.php" method="get">
+      <select name="appeal">
+        <option>Select an Appeal ID</option>
+        <?php
+        $query = "SELECT * FROM `appeals`";
+        $result = mysqli_query($conn,$query);
+        WHILE($row=mysqli_fetch_array($result)){
+          ?>
+          <option value="<?php echo $row["appeal_id"]; ?>"><?php echo $row["appeal_id"]; ?></option>
+        <?php
+        }
+        ?>
+      </select>
+
+        
+        <input class="submit-btn" type="submit" value="Submit">
+      </select>
     </body>
     </html>

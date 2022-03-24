@@ -94,7 +94,12 @@ input[type="submit"]:hover{
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
             <!--Create dropdown toggle-->
+
             <li class="nav-item active dropdown">
+              <a href="viewcurrentAppeals.php" class="nav-link">
+                View Current Appeals
+              </a>
+            </li>
               
               <!--To dropdown the items-->
               
@@ -107,11 +112,7 @@ input[type="submit"]:hover{
 
             
 
-            <li class="nav-item">
-              <a href="viewcurrentAppeals.php" class="nav-link">
-                View Current Appeals
-              </a>
-            </li>
+            
 
             <li class="nav-item">
               <a href="logout.php" class="nav-link">

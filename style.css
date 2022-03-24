@@ -110,54 +110,7 @@
 
 
 
-body {
-  background-image: url('img/');
-  background-repeat: no-repeat;
-  background-attachment: fixed; 
-  background-size: 100% 100%;
-}
-  body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
-  body, html {
-      height: 100%;
-      line-height: 1.8;
-      text-align: center;
-  }
 
-  .w3-bar .w3-button {
-      padding: 16px;
-  }
-
-  .w3-container{
-    margin-top: 50px;
-    padding: 16px;
-  }
-
-  input[type="submit"], input[type="text"]{
-    display:block;
-    margin-left: 380px;
-    margin-left: 240px;
-  }
-
-  input[type="text"]{
-      color: black;
-      padding: 12px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 50%;
-  }
-  input[type="submit"]{
-    background-color: #ccc;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 50%;
-  }
-
-  input[type="submit"]:hover{
-    background-color: #FFC300;
-  }
 
 
 

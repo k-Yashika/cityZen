@@ -1,4 +1,4 @@
-<!--select appeal: use case 5--> 
+<!--select appeal: use case 4--> 
 <?php
   $conn = mysqli_connect("localhost", "root","");
   $db = mysqli_select_db($conn, "cityZen");
@@ -40,11 +40,7 @@
           padding: 16px;
         }
 
-        input[type="submit"], input[type="text"]{
-          display:block;
-          margin-left: 380px;
-          margin-left: 240px;
-        }
+        
 
         input[type="text"]{
             color: black;
@@ -109,8 +105,8 @@
             </li>
 
             <li class="nav-item">
-              <a href="record_contribution.php" class="nav-link">
-                Record Contribution
+              <a href="viewcurrentAppeals.php" class="nav-link">
+                View Current Appeals
               </a>
             </li>
 
@@ -135,28 +131,28 @@
       -->
       </div>
     </nav>
+    <br>
+
     <div class="w3-container" id="manage-org">
       <h1 class="w3-center">Record Contributions</h1>
-    <div class="w3-container" id="manage-appeal">
-      <h1 class="w3-center">Record Contribution</h1>
     </div>
 
     <div class="dropdown">
-      <form name="appealFormdd" action="selected_appeal.php" method="get">
+      <form name="appealFormPP" action="selectAppeal.php" method="get">
       <select name="appeal">
-        <option>Select an Appeal ID</option>
+        <option>Select Appeal's Name</option>
         <?php
         $query = "SELECT * FROM `appeals`";
         $result = mysqli_query($conn,$query);
         WHILE($row=mysqli_fetch_array($result)){
           ?>
-          <option value="<?php echo $row["appeal_id"]; ?>"><?php echo $row["appeal_id"]; ?></option>
+          <option value="<?php echo $row["tb_uesrs"]; ?>"><?php echo $row["tb_users"]; ?></option>
         <?php
         }
         ?>
       </select>
 
-        
+        <br><br>
         <input class="submit-btn" type="submit" value="Submit">
       </select>
     </body>

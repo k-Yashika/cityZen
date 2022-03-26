@@ -134,7 +134,7 @@
     <br>
 
     <div class="w3-container" id="manage-org">
-      <h1 class="w3-center">Record Contributions</h1>
+      <h1 class="w3-center">Select Appeal</h1>
     </div>
 
     <div class="dropdown">

@@ -1,12 +1,14 @@
-<!--view current appeal: use case 4--> 
+<!--Select Appeal ID: use case 6--> 
 <?php
   $conn = mysqli_connect("localhost", "root","");
   $db = mysqli_select_db($conn, "cityZen");
+  $query = "SELECT * FROM `appeals`";
+  $result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>View Current Appeals</title>
+        <title>Select Appeal </title>
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,58 +19,54 @@
         <link rel="stylesheet" href="style.css">
 
         <style>
+          
+      body {
+        background-image: url('img/');
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size: 100% 100%;
+      }
+        body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+        body, html {
+            height: 100%;
+            line-height: 1.8;
+            text-align: center;
+        }
 
-body {
-background-image: url('img/');
-background-repeat: no-repeat;
-background-attachment: fixed; 
-background-size: 100% 100%;
-}
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
-body, html {
-    height: 100%;
-    line-height: 1.8;
-    text-align: center;
-}
+        .w3-bar .w3-button {
+            padding: 16px;
+        }
 
-.w3-bar .w3-button {
-    padding: 16px;
-}
+        .w3-container{
+          margin-top: 50px;
+          padding: 16px;
+        }
 
-.w3-container{
-  margin-top: 50px;
-  padding: 16px;
-}
+        
 
+        input[type="text"]{
+            color: black;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 50%;
+        }
+        input[type="submit"]{
+          background-color: #ccc;
+          color: white;
+          padding: 12px 20px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          width: 50%;
+        }
 
-
-input[type="text"]{
-    color: black;
-    padding: 12px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 50%;
-}
-input[type="submit"]{
-  background-color: #ccc;
-  color: white;
-  padding: 10px 160px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-input[type="submit"]:hover{
-  background-color: #FFC300;
-}
-
-
-
-</style>
-
-
+        input[type="submit"]:hover{
+          background-color: #FFC300;
+        }
+        </style>
+        </head>
     </head>
-
     <body>
 
     <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light">
@@ -94,23 +92,19 @@ input[type="submit"]:hover{
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
             <!--Create dropdown toggle-->
-
             <li class="nav-item active dropdown">
-              <a href="viewcurrentAppeals.php" class="nav-link">
-                View Current Appeals
-              </a>
-            </li>
               
               <!--To dropdown the items-->
-              
+              <a href="selectAppealID.php" class="nav-link">
+              Select Appeal 
+              </a>
+            </li>
 
             <li class="nav-item">
               <a href="signup.php" class="nav-link">
                 Register Applicant
               </a>
             </li>
-
-            
 
             
 
@@ -122,7 +116,7 @@ input[type="submit"]:hover{
           </ul>
         </div>
         
-        <!--&&&&&Create search bar-->
+        <!--Create search bar-->
         <!--
           form-control: create some of the stylings for the input
         
@@ -135,21 +129,35 @@ input[type="submit"]:hover{
       -->
       </div>
     </nav>
-    <br><br>
-    <div class="w3-container" id="add-appeal">
-        <h2 class="w3-center">View Current Appeals</h2>
+    <br>
+
+    <div class="w3-container" id="manage-org">
+      <h1 class="w3-center">Select Appeal </h1>
     </div>
 
-      <form class="appealForm" action="appeal_server.php" method="POST">
-        <div class="w3-center">
-            <label type="text" name="appeal_id"></p>
-            <p>Start Date: <input type="date" name="start_date" required></p>
-            <p>End Date: <input type="date" name="end_date" required></p>
-            <br>
-            <p><h5>Description </h5></p>
-            <p><textarea name="description" cols="70" rows="10" required></textarea></p>
-            <input class="submit button1" type="submit" value="Submit">
-    </div>
-    </form>
+    <div class="dropdown">
+      <form name="appealFormPP" action="selectAppealID.php" method="get">
+      <select name="appeal">
+        <option>Select Appeal</option>
+        <?php
+        //$query = "SELECT * FROM `appeals`";
+        //$result = mysqli_query($conn,$query);
+        WHILE($row=mysqli_fetch_assoc($result)){
+          ?>
+          <option value="<?php echo $row["ID"]; ?>">
+            <?php echo  'ID: ' . $row["ID"] . ' - ' .
+                        'Start Date: ' . $row["start_date"] . ' - ' . 
+                        'End Date: ' . $row["end_date"] . ' - ' . 
+                        'Description: ' . $row["description"]; ?>
+          </option>
+        <?php
+        }
+        ?>
+      </select>
+
+        <br><br>
+        <input class="submit-btn" type="submit" value="Submit">
+      </select>
     </body>
+    </html>
     </html>

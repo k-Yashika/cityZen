@@ -101,22 +101,17 @@
             <li class="nav-item active dropdown">
               
               <!--To dropdown the items-->
-              <a href="new_appeal.php" class="nav-link">
-                Organize Aid Appeal
+              <a href="record_contributions.php" class="nav-link">
+              Record Contributions
               </a>
             </li>
 
             <li class="nav-item">
-              <a href="signup.php" class="nav-link">
-                Register Applicant
+              <a href="login.php" class="nav-link">
+                Login
               </a>
             </li>
 
-            <li class="nav-item">
-              <a href="record_contribution.php" class="nav-link">
-                Record Contribution
-              </a>
-            </li>
 
             <li class="nav-item">
               <a href="logout.php" class="nav-link">
@@ -139,16 +134,17 @@
       -->
       </div>
     </nav>
-    <div class="w3-container" id="manage-org">
-      <h1 class="w3-center">Record Contributions</h1>
+    <br>
     <div class="w3-container" id="manage-appeal">
-      <h1 class="w3-center">Record Contribution</h1>
+      <h2 class="w3-center">Record Contribution</h2>
     </div>
 
     <div class="dropdown">
       <form name="appealFormdd" action="selected_appeal.php" method="get">
       <select name="appeal">
+      <br> <br>
         <option>Select an Appeal ID</option>
+        
         <?php
         $query = "SELECT * FROM `appeals`";
         $result = mysqli_query($conn,$query);
@@ -158,11 +154,12 @@
         <?php
         }
         ?>
-      </select>
-
-        
+        </select>
+         <br> <br>
+      
         <input class="submit-btn" type="submit" value="Submit">
       </select>
+     
     </body>
     </html>
-    </html>
+    

@@ -1,18 +1,20 @@
-<!--view current appeal: use case 4--> 
+<!--contributions home: use case 5--> 
 <?php
   $conn = mysqli_connect("localhost", "root","");
   $db = mysqli_select_db($conn, "cityZen");
-  $query = "SELECT * FROM `appeals`";
-  $result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>View Current Appeals</title>
+        <title>Record Contributions</title>
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="style.css">
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -42,7 +44,11 @@
           padding: 16px;
         }
 
-        
+        input[type="submit"], input[type="text"]{
+          display:block;
+          margin-left: 380px;
+          margin-left: 240px;
+        }
 
         input[type="text"]{
             color: black;
@@ -95,18 +101,17 @@
             <li class="nav-item active dropdown">
               
               <!--To dropdown the items-->
-              <a href="ViewCurrentAppeals.php" class="nav-link">
-              View Current Appeals
+              <a href="record_contributions.php" class="nav-link">
+              Record Contributions
               </a>
             </li>
 
             <li class="nav-item">
-              <a href="signup.php" class="nav-link">
-                Register Applicant
+              <a href="login.php" class="nav-link">
+                Login
               </a>
             </li>
 
-            
 
             <li class="nav-item">
               <a href="logout.php" class="nav-link">
@@ -130,29 +135,31 @@
       </div>
     </nav>
     <br>
-
-    <div class="w3-container" id="manage-org">
-      <h1 class="w3-center">View Current Appeals</h1>
+    <div class="w3-container" id="manage-appeal">
+      <h2 class="w3-center">Record Contribution</h2>
     </div>
 
     <div class="dropdown">
-      <form name="appealFormPP" action="selectAppeal.php" method="get">
+      <form name="appealFormdd" action="selected_appeal.php" method="get">
       <select name="appeal">
-        <option>View Current Appeals</option>
+      <br> <br>
+        <option>Select an Appeal ID</option>
+        
         <?php
-        //$query = "SELECT * FROM `appeals`";
-        //$result = mysqli_query($conn,$query);
-        WHILE($row=mysqli_fetch_assoc($result)){
+        $query = "SELECT * FROM `appeals`";
+        $result = mysqli_query($conn,$query);
+        WHILE($row=mysqli_fetch_array($result)){
           ?>
-          <option value="<?php echo $row["ID"]; ?>"><?php echo $row["start_date"] . '-' . $row["end_date"] . '-' . $row["description"]; ?></option>
+          <option value="<?php echo $row["appeal_id"]; ?>"><?php echo $row["appeal_id"]; ?></option>
         <?php
         }
         ?>
-      </select>
-
-        <br><br>
+        </select>
+         <br> <br>
+      
         <input class="submit-btn" type="submit" value="Submit">
       </select>
+     
     </body>
     </html>
-    </html>
+    

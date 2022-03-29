@@ -1,4 +1,48 @@
 <!--organize aid appeal: use case 3-->
+<?php
+    ini_set('display_errors', '1');
+    ini_set('display_startup_errors', '1');
+    error_reporting(E_ALL);
+
+    $conn = mysqli_connect("localhost", "root","");
+    $db = mysqli_select_db($conn, "cityZen");
+    $Errors = array();
+
+    if(count($_POST) > 0){
+        if(isset($_POST["btnSubmit"])){
+            $start_date = isset($_POST['start_date']) ? mysqli_real_escape_string($conn, $_POST['start_date']) : '';
+            $end_date = isset($_POST['end_date']) ? mysqli_real_escape_string($conn, $_POST['end_date']) : '';
+            $description = isset($_POST['description']) ? mysqli_real_escape_string($conn, $_POST['description']) : '';
+        }
+        
+        if(empty($start_date)){
+            $Errors['start_date'] = 'Start Date is empty.';
+        }
+    
+        if(empty($end_date)){
+            $Errors['end_date'] = 'End Date is empty.';
+        }
+    
+        if(empty($description)){
+            $Errors['description'] = 'Description is empty.';
+        }
+    
+        if($start_date > $end_date){
+            $Errors['error_date'] = 'Start Date must be sooner than End Date';
+        }
+    
+        if(count($Errors) == 0){
+            $queryInsert = "INSERT INTO appeals (`start_date`, `end_date`, `description`) VALUES ('$start_date', '$end_date', '$description')";
+    
+            if(mysqli_query($conn, $queryInsert)){
+                header("location: new_appeal.php?msg=success");
+            } else{
+                echo $db->error;
+            }
+            mysqli_close($db);
+        }
+    }
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -89,7 +133,7 @@
       <div class="container">
         <!--Put title and image of the website-->
         <a href="#" class="navbar-brand mb-0 h1">
-          <img src="img/cityZen.png" width="45" height="auto" alt="imageWeb">
+          <img src="img/cityZen.png" width="65" height="auto" alt="imageWeb">
           cityZen
         </a>
          <!--
@@ -134,33 +178,37 @@
             </li>
           </ul>
         </div>
-        
-        <!--Create search bar-->
-        <!--
-          form-control: create some of the stylings for the input
-        
-        <form action="#" class="d-flex">
-          <input type="text" class="form-control me-2" name="search">
-          <button type="submit" class="btn btn-outline-success">
-            Search
-          </button>
-        </form>
-      -->
       </div>
     </nav>
+    <br>
+
     <div class="w3-container" id="add-appeal">
         <h1 class="w3-center">New Appeal</h1>
         <h4 class="w3-center">Record a New Aid Appeal</h4>
     </div>
-
-      <form class="appealForm" action="appeal_server.php" method="POST">
+    <?php  if (count($Errors) > 0) : ?>
+      <div class="error">
+        <?php foreach ($Errors as $error) : ?>
+          <p><?php echo $error ?></p>
+        <?php endforeach ?>
+      </div>
+    <?php  endif ?>
+    <?php
+      if(isset($_GET['msg']) && $_GET['msg'] == 'success'){
+        echo '<script type="text/javascript">
+                alert("Record Inserted!");
+                window.location.href = "new_appeal.php";
+              </script>';
+      }
+    ?>
+      <form class="appealForm" action="new_appeal.php" method="POST">
         <div class="w3-center">
             <label type="text" name="appeal_id"></p>
-            <p>Start Date <input type="date" name="start_date" required></p>
-            <p>End Date <input type="date" name="end_date" required></p>
-            <p>Description<textarea name="description" cols="100" rows="8" required></textarea></p>
-            <input class="submit" type="submit" value="Submit">
-    </div>
-    </form>
+            <p>Start Date: <input type="date" name="start_date" required></p>
+            <p>End Date: <input type="date" name="end_date" required></p>
+            <p>Description: <textarea name="description" cols="100" rows="8" required></textarea></p>
+            <input class="submit" type="submit" value="Submit" name="btnSubmit">
+        </div>
+      </form>
     </body>
     </html>

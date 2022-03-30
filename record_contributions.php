@@ -1,7 +1,52 @@
-<!--record contributions: use case 5--> 
 <?php
+ ini_set('display_errors', '1');
+ ini_set('display_startup_errors', '1');
+ error_reporting(E_ALL);
+
   $conn = mysqli_connect("localhost", "root","");
   $db = mysqli_select_db($conn, "cityZen");
+
+  $Errors = array();
+  $row = array();
+  $id = 0;
+  if(count($_POST) > 0){
+    if(isset($_POST['btnSubmit'])){
+      $id = isset($_POST['radID']) ? mysqli_real_escape_string($conn, $_POST['radID']) : 0;
+
+      if($id > 0){
+        $query = "SELECT * FROM `appeals` WHERE `ID` = '$id'";
+        $result = mysqli_query($conn, $query);
+        $row = mysqli_fetch_assoc($result);
+
+        //extract($row);
+      }
+    }
+
+    if(isset($_POST['btnSubmit2'])){
+      $description = isset($_POST['description']) ? mysqli_real_escape_string($conn, $_POST['description']) : '';
+      $value = isset($_POST['value']) ? mysqli_real_escape_string($conn, $_POST['value']) : '';
+      //$received_date = isset($_POST['received_date']) ? mysqli_real_escape_string($conn, $_POST['received_date']) : '';
+
+      if($description == ''){
+        $Errors['description']  = 'Description is empty';
+      }
+
+      if($value == ''){
+        $Errors['value'] = 'Value is empty';
+      }
+
+      if(count($Errors) == 0){
+        $queryInsert = "INSERT INTO `contributions` (`description`, `value`) VALUES ('$description', '$value')";
+
+        if(mysqli_query($conn, $queryInsert)){
+            header("location: record_contributions.php?msg=success");
+        } else{
+            echo $db->error;
+        }
+        mysqli_close($db);
+    }
+    }
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,7 +91,6 @@
 
         input[type="submit"], input[type="text"]{
           display:block;
-          margin-left: 380px;
           margin-left: 240px;
         }
 
@@ -71,24 +115,28 @@
           background-color: #FFC300;
         }
         </style>
-        </head>
+
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+        
     </head>
     <body>
-
+        <?php
+          if(isset($_GET['msg']) && $_GET['msg'] == 'success'){
+            echo '<script type="text/javascript">alert("Record Inserted Successfully.");</script>';
+          }
+        ?>
     <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light">
       <!--to contain contents in the container in the nav bar-->
       <div class="container">
         <!--Put title and image of the website-->
         <a href="#" class="navbar-brand mb-0 h1">
-          <img src="img/cityZen.png" width="45" height="auto" alt="imageWeb">
+          <img src="img/cityZen.png" width="65" height="auto" alt="imageWeb">
           cityZen
         </a>
-         <!--
-          To toggle the navigation bar
-          data-toggle: class that will be applying toggle to 
-          data-target: target will be that ID created in div tag below
-          add accessible tags: aria-controls, expanded, label
-        -->
+         
         <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" class="navbar-toggler">
           <!--Add icon for the toggle button-->
           <span class="navbar-toggler-icon"></span>
@@ -101,17 +149,16 @@
             <li class="nav-item active dropdown">
               
               <!--To dropdown the items-->
-              <a href="record_contributions.php" class="nav-link">
-              Record Contributions
+              <a href="new_appeal.php" class="nav-link">
+                Organize Aid Appeal
               </a>
             </li>
 
             <li class="nav-item">
-              <a href="login.php" class="nav-link">
-                Login
+              <a href="record_contributions.php" class="nav-link">
+                Record Contribution
               </a>
             </li>
-
 
             <li class="nav-item">
               <a href="logout.php" class="nav-link">
@@ -119,47 +166,37 @@
               </a>
             </li>
           </ul>
-        </div>
-        
-        <!--Create search bar-->
-        <!--
-          form-control: create some of the stylings for the input
-        
-        <form action="#" class="d-flex">
-          <input type="text" class="form-control me-2" name="search">
-          <button type="submit" class="btn btn-outline-success">
-            Search
-          </button>
-        </form>
-      -->
+      </div>
       </div>
     </nav>
     <br>
-    <div class="w3-container" id="manage-appeal">
-      <h2 class="w3-center">Record Contribution</h2>
+    <div class="w3-container" id="selected-appeal">
+        <h1 class="w3-center">Record Contributions</h1>
+    
+        <?php
+          if($row){
+            echo 'ID: ' . $row["ID"] . ' - ' .
+                 'Start Date: ' . $row["start_date"] . ' - ' .
+                 'End Date: ' . $row["end_date"] . ' - ' .
+                 'Description: ' . $row["description"];
+          }
+        ?>
     </div>
 
-    <div class="dropdown">
-      <form name="appealFormdd" action="selected_appeal.php" method="get">
-      <select name="appeal">
-      <br> <br>
-        <option>Select an Appeal ID</option>
-        
-        <?php
-        $query = "SELECT * FROM `appeals`";
-        $result = mysqli_query($conn,$query);
-        WHILE($row=mysqli_fetch_array($result)){
-          ?>
-          <option value="<?php echo $row["appeal_id"]; ?>"><?php echo $row["appeal_id"]; ?></option>
-        <?php
-        }
-        ?>
-        </select>
-         <br> <br>
-      
-        <input class="submit-btn" type="submit" value="Submit">
-      </select>
-     
-    </body>
-    </html>
+    <form class="s_appealForm" action="record_contributions.php" method="POST">
+        <div class="w3-center">
+       
+            <label type="text" name="contribution_id"></p>
+            <p>Estimated Value<input type="text" name="value" style="margin: 0 auto !important"></p>
+            <p>Description: <br><textarea name="description" cols="100" rows="8" required></textarea></p>
+            
+            <input class="submit" name="btnSubmit2" type="submit" value="Submit" style="margin: 0 auto !important">
+    </div>
+    </form>
     
+   <!--     
+        show appeal start and end date
+        
+    -->
+    </body>
+  </html>

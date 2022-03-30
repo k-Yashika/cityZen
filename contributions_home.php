@@ -21,7 +21,14 @@
         <link rel="stylesheet" href="style.css">
 
         <style>
-          
+          #IDs {
+            width: 200px;
+            margin: 0 auto;
+          }
+          #IDs tr td {
+            border: 1px solid #cccccc;
+
+          }
       body {
         background-image: url('img/');
         background-repeat: no-repeat;
@@ -80,7 +87,7 @@
       <div class="container">
         <!--Put title and image of the website-->
         <a href="#" class="navbar-brand mb-0 h1">
-          <img src="img/cityZen.png" width="45" height="auto" alt="imageWeb">
+          <img src="img/cityZen.png" width="65" height="auto" alt="imageWeb">
           cityZen
         </a>
          <!--
@@ -140,26 +147,30 @@
     </div>
 
     <div class="dropdown">
-      <form name="appealFormdd" action="selected_appeal.php" method="get">
-      <select name="appeal">
-      <br> <br>
-        <option>Select an Appeal ID</option>
-        
-        <?php
+      <?php
         $query = "SELECT * FROM `appeals`";
         $result = mysqli_query($conn,$query);
-        WHILE($row=mysqli_fetch_array($result)){
-          ?>
-          <option value="<?php echo $row["appeal_id"]; ?>"><?php echo $row["appeal_id"]; ?></option>
-        <?php
-        }
-        ?>
-        </select>
-         <br> <br>
-      
-        <input class="submit-btn" type="submit" value="Submit">
-      </select>
-     
+      ?>
+      <form name="appealFormdd" action="record_contributions.php" method="post">
+        <table id="IDs">
+              <tr>
+                  <td>Row</td>
+                  <td>ID</td>
+              </tr>
+          
+            <?php
+            WHILE($row=mysqli_fetch_array($result)){
+              ?>
+              <tr>
+                <td><input type="radio" name="radID" value="<?php echo $row["ID"]; ?>"/></td>
+                <td><?php echo $row["ID"] ?></td>
+              </tr>
+            <?php
+            }
+            ?>
+        </table>
+        <br>
+        <input class="submit-btn" type="submit" name="btnSubmit" value="Submit" style="margin: 0 auto !important">     
     </body>
     </html>
     

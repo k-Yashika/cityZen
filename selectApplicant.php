@@ -138,7 +138,7 @@
     </div>
 
     <div class="dropdown">
-      <form name="appealFormPP" action="selectApplicant.php" method="get">
+      <form name="appealFormPP" action="selectApplicant.php" method="post">
       <select name="Applicant">
         <option>Select Applicant</option>
         <?php
@@ -146,7 +146,7 @@
         $result = mysqli_query($conn,$query);
         WHILE($row=mysqli_fetch_array($result)){
           ?>
-          <option value="<?php echo $row[""]; ?>"><?php echo $row[""]; ?></option>
+          <option value="<?php echo $row["applicantid"]; ?>"><?php echo $row["fullname"] . ' - ' . $row["address"] . ' - ' . $row["householdincome"]; ?></option>
         <?php
         }
         ?>
@@ -154,7 +154,6 @@
 
         <br><br>
         <input class="submit-btn" type="submit" value="Submit">
-      </select>
+      </form>
     </body>
-    </html>
     </html>

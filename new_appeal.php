@@ -31,6 +31,11 @@
             $Errors['error_date'] = 'Start Date must be sooner than End Date';
         }
     
+        $today = date('Y-m-d', time());
+        if($start_date < $today){
+          $Errors['less_today'] = 'Start Date cannot be less than today date';
+        }
+        
         if(count($Errors) == 0){
             $queryInsert = "INSERT INTO appeals (`start_date`, `end_date`, `description`) VALUES ('$start_date', '$end_date', '$description')";
     

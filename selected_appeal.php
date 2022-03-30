@@ -93,15 +93,10 @@
       <div class="container">
         <!--Put title and image of the website-->
         <a href="#" class="navbar-brand mb-0 h1">
-          <img src="img/cityZen.png" width="45" height="auto" alt="imageWeb">
+          <img src="img/cityZen.png" width="65" height="auto" alt="imageWeb">
           cityZen
         </a>
-         <!--
-          To toggle the navigation bar
-          data-toggle: class that will be applying toggle to 
-          data-target: target will be that ID created in div tag below
-          add accessible tags: aria-controls, expanded, label
-        -->
+         
         <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" class="navbar-toggler">
           <!--Add icon for the toggle button-->
           <span class="navbar-toggler-icon"></span>
@@ -120,13 +115,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="signup.php" class="nav-link">
-                Register Applicant
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="record_contribution.php" class="nav-link">
+              <a href="record_contributions.php" class="nav-link">
                 Record Contribution
               </a>
             </li>
@@ -137,21 +126,10 @@
               </a>
             </li>
           </ul>
-        </div>
-        
-        <!--Create search bar-->
-        <!--
-          form-control: create some of the stylings for the input
-        
-        <form action="#" class="d-flex">
-          <input type="text" class="form-control me-2" name="search">
-          <button type="submit" class="btn btn-outline-success">
-            Search
-          </button>
-        </form>
-      -->
+      </div>
       </div>
     </nav>
+    <br>
     <div class="w3-container" id="selected-appeal">
         <h1 class="w3-center"><?php echo $appeal; ?></h1>
     </div>
@@ -168,8 +146,9 @@
         }
         ?>
             <label type="text" name="contribution_id"></p>
-            <p>Description <textarea name="s_description" cols="100" rows="8" required></textarea></p>
             <p>Estimated Value of Goods <input type="text" name="value"></p>
+            <p>Description: <textarea name="s_description" cols="100" rows="8" required></textarea></p>
+            
             <input class="submit" type="submit" value="Submit">
     </div>
     </form>

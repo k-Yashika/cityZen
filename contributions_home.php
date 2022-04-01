@@ -152,10 +152,12 @@
         $result = mysqli_query($conn,$query);
       ?>
       <form name="appealFormdd" action="record_contributions.php" method="post">
-        <table id="IDs">
+        <table id="IDs" style="width:80%">
               <tr>
-                  <td>Row</td>
+                  <td>Select</td>
                   <td>ID</td>
+                  <td>From Date</td>
+                  <td>To Date</td>
               </tr>
           
             <?php
@@ -164,6 +166,8 @@
               <tr>
                 <td><input type="radio" name="radID" value="<?php echo $row["ID"]; ?>"/></td>
                 <td><?php echo $row["ID"] ?></td>
+                <td><?php echo $row["start_date"] ?></td>
+                <td><?php echo $row["end_date"] ?></td>
               </tr>
             <?php
             }

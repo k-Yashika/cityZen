@@ -138,7 +138,7 @@
     </div>
 
     <div class="dropdown">
-      <form name="appealFormPP" action="selectApplicant.php" method="post">
+      <form name="appealFormPP" action="recordDisbursement.php" method="post">
       <select name="Applicant">
         <option>Select Applicant</option>
         <?php

@@ -137,11 +137,11 @@
 
     <div class="dropdown">
       <form name="appealFormPP" action="selectAppeal.php" method="get">
-      <select name="appeal">
+      <select name="appeal" require>
         <option>View Current Appeals</option>
         <?php
-        //$query = "SELECT * FROM `appeals`";
-        //$result = mysqli_query($conn,$query);
+        $query = "SELECT * FROM `appeals`";
+        $result = mysqli_query($conn,$query);
         WHILE($row=mysqli_fetch_assoc($result)){
           ?>
           <option value="<?php echo $row["ID"]; ?>"><?php echo $row["start_date"] . '-' . $row["end_date"] . '-' . $row["description"]; ?></option>

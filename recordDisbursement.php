@@ -25,7 +25,7 @@
      if(empty($goods)){
          $Errors['goods'] = 'Goods is empty.';
      }
- 
+   
  
      if(count($Errors) == 0){
          $queryInsert = "INSERT INTO disbursement (`date`, `cash`, `goods`) VALUES ('$date', '$cash', '$goods')";
@@ -157,14 +157,23 @@ body {
 
 <h1>Record Disbursement</h1>
 
+<?php
+      if(isset($_GET['msg']) && $_GET['msg'] == 'success'){
+        echo '<script type="text/javascript">
+                alert("Record Inserted!");
+                window.location.href = "recordDisbursement.php";
+              </script>';
+      }
+    ?>
+
 
 <form class="Form" action="recordDisbursement.php" method="POST">
         <div class="w3-center">
             <label type="text" name="recordDisbursement"></p>
             <p>Date: <input type="date" name="date" required></p>
             <p>Cash: <input type="number" name="cash" required></p>
-            <p>Goods: <textarea name="goods" cols="100" rows="8" required></textarea></p>
-            <input class="submit" type="submit" value="Submit" name="btnSubmit">
+            <p>Goods: <br><textarea name="goods" cols="100" rows="8" required></textarea></p>
+            <input class="submit" type="submit" value="Submit" name="btnSubmit" style="margin: 0 auto !important">
         </div>
       </form>
     

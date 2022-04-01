@@ -187,7 +187,7 @@
         <div class="w3-center">
        
             <label type="text" name="contribution_id"></p>
-            <p>Estimated Value<input type="text" name="value" style="margin: 0 auto !important"></p>
+            <p>Estimated Value<input type="text" name="value" style="margin: 0 auto !important" require></p>
             <p>Description: <br><textarea name="description" cols="100" rows="8" required></textarea></p>
             
             <input class="submit" name="btnSubmit2" type="submit" value="Submit" style="margin: 0 auto !important">

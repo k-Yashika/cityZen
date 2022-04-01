@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Select Appeal</title>
+        <title>Show Appeal</title>
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,7 +72,7 @@
       <div class="container">
         <!--Put title and image of the website-->
         <a href="#" class="navbar-brand mb-0 h1">
-          <img src="img/cityZen.png" width="45" height="auto" alt="imageWeb">
+          <img src="img/cityZen.png" width="65" height="auto" alt="imageWeb">
           cityZen
         </a>
          <!--
@@ -94,7 +94,7 @@
               
               <!--To dropdown the items-->
               <a href="selectAppeal.php" class="nav-link">
-                Select Appeal
+                Show Appeal
               </a>
             </li>
 
@@ -131,15 +131,19 @@
       -->
       </div>
     </nav>
-    <br>
+    <br><br>
 
     <div class="w3-container" id="manage-org">
-      <h1 class="w3-center">Select Appeal</h1>
+      <h1 class="w3-center">UNICEF</h1>
+      <br>
+
+
+      <p>Menara PJH, Level 10, No. 2, Jalan Tun Abdul Razak, Precint 2, 62100, Putrajaya, Malaysia</p>
     </div>
 
     <div class="dropdown">
       <form name="appealFormPP" action="selectAppeal.php" method="get">
-      <select name="appeal">
+      <!--<select name="appeal">
         <option>Select Appeal's Name</option>
         <?php
         $query = "SELECT * FROM `Applicant`";
@@ -150,10 +154,9 @@
         <?php
         }
         ?>
-      </select>
+       
+      </select>-->
 
-        <br><br>
-        <input class="submit-btn" type="submit" value="Submit">
       </select>
     </body>
     </html>

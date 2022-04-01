@@ -28,12 +28,12 @@
         }
     
         if($start_date > $end_date){
-            $Errors['error_date'] = 'Start Date must be sooner than End Date';
+            $Errors['error_date'] = 'END DATE MUST BE AFTER START DATE';
         }
     
         $today = date('Y-m-d', time());
         if($start_date < $today){
-          $Errors['less_today'] = 'Start Date cannot be less than today date';
+          $Errors['less_today'] = 'START DATE CANNOT BE BEFORE CURRENT DATE';
         }
         
         if(count($Errors) == 0){
@@ -211,8 +211,8 @@
             <label type="text" name="appeal_id"></p>
             <p>Start Date: <input type="date" name="start_date" required></p>
             <p>End Date: <input type="date" name="end_date" required></p>
-            <p>Description: <textarea name="description" cols="100" rows="8" required></textarea></p>
-            <input class="submit" type="submit" value="Submit" name="btnSubmit">
+            <p>Description: <br><textarea name="description" cols="100" rows="8" required></textarea></p>
+            <input class="submit" type="submit" value="Submit" name="btnSubmit" style="margin: 0 auto !important">
         </div>
       </form>
     </body>

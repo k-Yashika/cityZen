@@ -136,7 +136,7 @@
     </div>
 
     <div class="dropdown">
-      <form name="appealFormPP" action="selectAppealID.php" method="get">
+      <form name="appealFormPP" action="selectApplicant.php" method="get">
       <select name="appeal">
         <option>Select Appeal</option>
         <?php
